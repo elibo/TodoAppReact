@@ -4,6 +4,6 @@ import Header from "./header";
 
 test("renders Header component", () => {
   render(<Header />);
-  const linkElement = screen.getByText(/LOGOUT/i);
+  const linkElement = screen.getByText("Exit");
   expect(linkElement).toBeInTheDocument();
 });

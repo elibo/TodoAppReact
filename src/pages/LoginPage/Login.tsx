@@ -1,19 +1,40 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import Button from "../../components/button/button";
-import { Card } from "antd";
+import { Card, message } from "antd";
 import { doLogin, setToken } from "../../utils/auth";
 import MyInput from "../../components/input/input";
 
 const Login = () => {
   const [isLogged, setIsLogged] = useState(false);
+  const [user, setUser] = useState({ name: undefined, password: undefined });
 
   const login = () => {
-    const token = doLogin({ name: "Test", password: "test" });
+    const token = doLogin({ name: user.name, password: user.password });
     if (token) {
       setToken(token);
       setIsLogged(true);
+    } else {
+      message.error("This user is not correct");
     }
+  };
+
+  const onNameChange = (event: any) => {
+    setUser((prevUser) => {
+      return {
+        ...prevUser,
+        name: event.target.value,
+      };
+    });
+  };
+
+  const onPasswordChange = (event: any) => {
+    setUser((prevUser) => {
+      return {
+        ...prevUser,
+        password: event.target.value,
+      };
+    });
   };
 
   return (
@@ -26,10 +47,18 @@ const Login = () => {
             bordered={false}
             style={{ width: 300 }}
           >
-            <MyInput placeholder="User" />
-            <MyInput placeholder="Pass" isPass={true} />
+            <MyInput placeholder="User" onChange={onNameChange} />
+            <MyInput
+              placeholder="Pass"
+              isPass={true}
+              onChange={onPasswordChange}
+            />
           </Card>
-          <Button label={"Login"} onClick={login} />
+          <Button
+            disabled={!user.name || !user.password}
+            label={"Login"}
+            onClick={login}
+          />
         </div>
       ) : (
         <Navigate to="/main" />

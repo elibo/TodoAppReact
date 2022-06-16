@@ -1,6 +1,4 @@
 export interface User {
-  name?: string;
-  password?: string;
-  isLogged?: boolean;
-  expires_in?: number;
+  name: string | undefined;
+  password: string | undefined;
 }

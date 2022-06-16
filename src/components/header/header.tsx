@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { doLogout } from "../../utils/auth";
 import { PageHeader } from "antd";
-import { OmitProps } from "antd/lib/transfer/ListBody";
 import MyButton from "../button/button";
 
 const Header = () => {

@@ -25,3 +25,26 @@ body {
 .custom-input {
   margin: 0.5rem;
 }
+.list-wrapper {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .input-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .list {
+    margin: 1rem;
+    .list-item {
+      background-color: white;
+      padding: 1rem;
+      &.done {
+        background-color: grey;
+        text-decoration: line-through;
+      }
+    }
+  }
+}

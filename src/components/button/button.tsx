@@ -2,12 +2,13 @@ import { Button } from "antd";
 
 interface ButtonProps {
   label: string;
+  disabled?: boolean;
   onClick: () => void;
 }
 
 const MyButton = (props: ButtonProps) => {
   return (
-    <Button type="primary" onClick={props.onClick}>
+    <Button disabled={props.disabled} type="primary" onClick={props.onClick}>
       {props.label}
     </Button>
   );
