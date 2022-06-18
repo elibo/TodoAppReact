@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import Button from "../../components/button/button";
 import { Card, message } from "antd";
-import { doLogin, setToken } from "../../utils/auth";
+import { doLogin, setToken } from "../../utils/Auth/auth";
 import MyInput from "../../components/input/input";
 
 const Login = () => {
@@ -47,11 +47,16 @@ const Login = () => {
             bordered={false}
             style={{ width: 300 }}
           >
-            <MyInput placeholder="User" onChange={onNameChange} />
+            <MyInput
+              placeholder="User"
+              onChange={onNameChange}
+              value={user.name!}
+            />
             <MyInput
               placeholder="Pass"
               isPass={true}
               onChange={onPasswordChange}
+              value={user.password!}
             />
           </Card>
           <Button

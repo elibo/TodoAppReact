@@ -1,4 +1,4 @@
-import { User } from "../model/user.model";
+import { User } from "../../model/user.model";
 
 export const doLogin = (user: User) => {
   const { name, password } = user;

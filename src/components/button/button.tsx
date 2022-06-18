@@ -8,7 +8,7 @@ interface ButtonProps {
 
 const MyButton = (props: ButtonProps) => {
   return (
-    <Button disabled={props.disabled} type="primary" onClick={props.onClick}>
+    <Button disabled={props.disabled} type="link" onClick={props.onClick}>
       {props.label}
     </Button>
   );

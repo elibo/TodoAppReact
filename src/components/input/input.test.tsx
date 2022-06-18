@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import MyInput from "./input";
 
 test("renders Input component", () => {
-  render(<MyInput placeholder="input" onChange={() => {}} />);
+  render(<MyInput placeholder="input" onChange={() => {}} value="" />);
   const linkElement = screen.getByPlaceholderText("input");
   expect(linkElement).toBeInTheDocument();
 });

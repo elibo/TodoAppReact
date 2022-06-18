@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { doLogout } from "../../utils/auth";
+import { doLogout } from "../../utils/Auth/auth";
 import { PageHeader } from "antd";
 import MyButton from "../button/button";
 

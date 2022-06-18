@@ -2,6 +2,7 @@ import { Input } from "antd";
 
 interface InputProps {
   placeholder: string;
+  value: string;
   isPass?: boolean;
   onChange: (event: any) => void;
 }
@@ -18,6 +19,7 @@ const MyInput = (props: InputProps) => {
       className="custom-input"
       placeholder={props.placeholder}
       onChange={(e) => props.onChange(e)}
+      value={props.value}
     />
   );
 };

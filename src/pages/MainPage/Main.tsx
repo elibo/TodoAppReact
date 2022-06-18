@@ -8,21 +8,30 @@ import { ToDo } from "../../model/todo.model";
 const Main = () => {
   const [todo, setTodo] = useState<ToDo>({});
   const [todos, setTodos] = useState<Array<ToDo>>([]);
-
-  const onInputChange = (e: any) => {
-    setTodo({ title: e.target.value, done: false });
-  };
+  const [isEdit, setEdit] = useState(false);
 
   const addTodo = () => {
-    setTodos([...todos, todo]);
+    if (todo.title) {
+      setTodos([...todos, todo]);
+      setTodo({ title: "" });
+    }
   };
 
   const onTodoDone = (index: number) => {
-    console.log(index);
+    const updateList = todos.map((item, i) => ({
+      ...item,
+      done: i === index ? !item.done : item.done,
+    }));
+    setTodos(updateList);
+  };
+
+  const onTodoUpdate = (index: number) => {
+    setEdit(true);
   };
 
   const onTodoRemove = (index: number) => {
-    console.log(index);
+    const newList = todos.filter((_: any, i: number) => i !== index);
+    setTodos(newList);
   };
 
   return (
@@ -30,10 +39,20 @@ const Main = () => {
       <Header />
       <div className="list-wrapper">
         <div className="input-wrapper">
-          <MyInput placeholder="Add a new todo" onChange={onInputChange} />
+          <MyInput
+            placeholder="Add a new todo"
+            onChange={(e: any) => setTodo({ title: e.target.value })}
+            value={todo.title!}
+          />
           <MyButton label="Add" onClick={addTodo} />
         </div>
-        <MyList list={todos} onDone={onTodoDone} onRemove={onTodoRemove} />
+        <MyList
+          list={todos}
+          onDone={onTodoDone}
+          onRemove={onTodoRemove}
+          onUpdate={onTodoUpdate}
+          isEdit={isEdit}
+        />
       </div>
     </div>
   );
