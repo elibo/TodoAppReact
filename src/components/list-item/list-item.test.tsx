@@ -7,3 +7,9 @@ test("renders ListItem component", () => {
     const linkElement = screen.getByText("listitem");
     expect(linkElement).toBeInTheDocument();
 });
+
+test("renders ListItem component done", () => {
+    render(<ListItem title="listitem" done={true} onDone={() => { }} onRemove={() => { }} onUpdate={() => { }} />);
+    const linkElement = screen.getByText("listitem");
+    expect(linkElement).toBeInTheDocument();
+});

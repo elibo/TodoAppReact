@@ -1,24 +1,29 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import EditItem from "./edit-item";
-import { click } from "@testing-library/user-event/dist/click";
 
-let clickFn = jest.fn();
+let mockFn = jest.fn();
+const setStateMock = jest.fn();
+const useStateMock: any = (useState: any) => [useState, setStateMock];
 
 
 afterEach(() => {
-    clickFn.mockClear();
+    mockFn.mockClear();
+    setStateMock.mockClear();
 })
 
 test("renders Edit Item component", () => {
+    jest.spyOn(React, 'useState').mockImplementation(useStateMock);
     render(<EditItem title="test" onSave={() => { }} />);
     const linkElement = screen.getByText("Save");
+    fireEvent.change(screen.getByDisplayValue('test'), { target: { value: '1' } })
     expect(linkElement).toBeInTheDocument();
+    expect(setStateMock).toHaveBeenCalled();
 });
 
 test("renders Edit Item component with click", () => {
-    render(<EditItem title="test" onSave={() => { }} />);
+    jest.spyOn(React, 'useState').mockImplementation(useStateMock);
+    render(<EditItem title="test" onSave={mockFn} />);
     fireEvent.click(screen.getByText("Save"));
-    clickFn();
-    expect(clickFn.mock.calls.length).toBe(1);
+    expect(mockFn.mock.calls.length).toBe(1);
 });

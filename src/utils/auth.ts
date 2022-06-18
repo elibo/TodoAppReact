@@ -8,9 +8,7 @@ export const doLogin = (user: User) => {
 };
 
 export const doLogout = () => {
-  sessionStorage.clear();
   localStorage.clear();
-  // return false;
 };
 
 export const setToken = (token: string) => {

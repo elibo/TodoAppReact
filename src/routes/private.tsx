@@ -1,12 +1,6 @@
 import { Navigate } from "react-router-dom";
-import { getToken } from "../utils/auth";
-
-const useAuth = () => {
-  const token = getToken();
-  return token;
-};
+import { isLoggedIn } from "../utils/auth";
 
 export const PrivateRoute = ({ children }: { children: any }) => {
-  const auth = useAuth();
-  return auth ? children : <Navigate to="/" />;
+  return isLoggedIn() ? children : <Navigate to="/login" />;
 };
