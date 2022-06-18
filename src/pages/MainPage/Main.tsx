@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MyButton from "../../components/button/button";
 import Header from "../../components/header/header";
 import MyInput from "../../components/input/input";
 import MyList from "../../components/list/list";
-import { ToDo } from "../../model/todo.model";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { doLogout } from "../../utils/auth";
 
 const Main = () => {
-  const [todo, setTodo] = useState<ToDo>({});
-  const [todos, setTodos] = useState<Array<ToDo>>([]);
-  const [isEdit, setEdit] = useState(false);
+  const [todo, setTodo] = useState<any>({});
+  const [todos, setTodos] = useLocalStorage('todos', []);
+  let navigate = useNavigate();
 
   const addTodo = () => {
     if (todo.title) {
@@ -17,16 +19,17 @@ const Main = () => {
     }
   };
 
+  const logout = () => {
+    doLogout();
+    navigate('/', { replace: true });
+  }
+
   const onTodoDone = (index: number) => {
-    const updateList = todos.map((item, i) => ({
+    const updateList = todos.map((item: any, i: number) => ({
       ...item,
       done: i === index ? !item.done : item.done,
     }));
     setTodos(updateList);
-  };
-
-  const onTodoUpdate = (index: number) => {
-    setEdit(true);
   };
 
   const onTodoRemove = (index: number) => {
@@ -34,9 +37,17 @@ const Main = () => {
     setTodos(newList);
   };
 
+  const onTodoEdited = (edited: string, index: number) => {
+    const updateList = todos.map((item: any, i: number) => ({
+      ...item,
+      title: i === index ? edited : item.title,
+    }));
+    setTodos(updateList);
+  }
+
   return (
-    <div>
-      <Header />
+    <div data-testid="main-page">
+      <Header onLogout={logout} />
       <div className="list-wrapper">
         <div className="input-wrapper">
           <MyInput
@@ -50,8 +61,7 @@ const Main = () => {
           list={todos}
           onDone={onTodoDone}
           onRemove={onTodoRemove}
-          onUpdate={onTodoUpdate}
-          isEdit={isEdit}
+          onUpdate={onTodoEdited}
         />
       </div>
     </div>

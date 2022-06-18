@@ -1,4 +1,4 @@
-import { doLogin, doLogout, setToken, getToken } from "./auth";
+import { doLogin, doLogout, setToken, getToken, isLoggedIn } from "./auth";
 
 describe("Auth service", () => {
   describe("login ", () => {
@@ -16,11 +16,22 @@ describe("Auth service", () => {
 
   it("should set token", () => {
     setToken("tk");
-    expect(sessionStorage.getItem("_token")).toEqual("tk");
+    expect(localStorage.getItem("_token")).toEqual("tk");
   });
 
   it("should get token", () => {
     setToken("tk");
     expect(getToken()).toBe("tk");
+  });
+
+  describe("should check if logged in", () => {
+    it('and return true', () => {
+      setToken('token');
+      expect(isLoggedIn()).toBeTruthy();
+    });
+    it('and return false', () => {
+      setToken('tk');
+      expect(isLoggedIn()).toBeFalsy();
+    });
   });
 });

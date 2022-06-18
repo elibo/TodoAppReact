@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import Button from "../../components/button/button";
 import { Card, message } from "antd";
-import { doLogin, setToken } from "../../utils/Auth/auth";
+import { doLogin, setToken, isLoggedIn } from "../../utils/auth";
 import MyInput from "../../components/input/input";
 
 const Login = () => {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(isLoggedIn);
   const [user, setUser] = useState({ name: undefined, password: undefined });
 
   const login = () => {

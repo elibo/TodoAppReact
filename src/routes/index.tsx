@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "../pages/LoginPage/Login";
 import Main from "../pages/MainPage/Main";
 import { PrivateRoute } from "./private";

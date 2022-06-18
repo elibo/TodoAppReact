@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { getToken } from "../utils/Auth/auth";
+import { getToken } from "../utils/auth";
 
 const useAuth = () => {
   const token = getToken();
