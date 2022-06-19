@@ -7,7 +7,7 @@ const Header = ({ onLogout }: any) => {
     <PageHeader
       className="app-header"
       title="TODO APP"
-      subTitle="Start adding things to your list"
+      subTitle="Don't forget anything"
     >
       <MyButton label="Exit" onClick={onLogout} />
     </PageHeader>

@@ -1,20 +1,11 @@
 import { useState } from "react";
 import Button from "../../components/button/button";
-import { Card, message } from "antd";
-import { doLogin, setToken } from "../../utils/auth";
+import { Card } from "antd";
 import MyInput from "../../components/input/input";
 
-const Login = () => {
+const Login = ({ onLogin }: any) => {
   const [user, setUser] = useState({ name: undefined, password: undefined });
 
-  const login = () => {
-    const token = doLogin({ name: user.name, password: user.password });
-    if (token) {
-      setToken(token);
-    } else {
-      message.error("This user is not correct");
-    }
-  };
 
   const onNameChange = (event: any) => {
     setUser((prevUser) => {
@@ -57,7 +48,7 @@ const Login = () => {
       <Button
         disabled={!user.name || !user.password}
         label={"Login"}
-        onClick={login}
+        onClick={() => onLogin(user)}
       />
     </div>
   );

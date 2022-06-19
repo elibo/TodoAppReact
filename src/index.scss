@@ -15,16 +15,28 @@ body {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+
   .login-card {
-    width: 50vw;
     text-align: center;
-    margin: 1rem;
+    margin-top: 4rem;
+
+    .ant-card-head {
+      background-color: #66a3ff;
+      color: #ffffff;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-size: 1.3rem;
+    }
+  }
+
+  button {
+    margin-top: 2rem;
   }
 }
 
 .custom-input {
   margin: 0.5rem;
 }
+
 .list-wrapper {
   padding: 2rem;
   display: flex;
@@ -38,9 +50,11 @@ body {
 
   .list {
     margin: 1rem;
+
     .list-item {
       background-color: white;
       padding: 1rem;
+
       &.done {
         background-color: grey;
         text-decoration: line-through;
